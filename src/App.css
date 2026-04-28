@@ -1,0 +1,18 @@
+.container {
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.hollow-shape {
+  display: block;
+}
+
+
+.app {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: azure;
+}
+
