@@ -17,11 +17,13 @@ const HollowObject = () => (
 );
 
 const Rangoli = ({ count = 8, x = -50 }) => (
-  <svg width="500" height="500" viewBox="-200 -200 400 400">
+  <svg 
+  width="500" height="500" viewBox="-200 -200 400 400"
+  >
     {Array.from({ length: count }).map((_, i) => (
       <g
         key={i}
-        style={{ transition: 'transform 3s ease-in-out' }}
+        style={{ transition: 'transform 7s ease-in-out' }}
         transform={`rotate(${(i * 360) / count}) translate(${x} -5)`}
       >
         <HollowObjectShape />
@@ -32,11 +34,19 @@ const Rangoli = ({ count = 8, x = -50 }) => (
 
 function App() {
   const [hovered, setHovered] = useState(false);
-  const x = hovered ? -180 : -50;
+  const x = hovered ? 80 : -50;
+  const rotation = hovered ? 120 : 0;
 
   return (
     <div className="app">
+      <div
+        className="rangoli-container"
+        style={{ transition: 'transform 7s ease-in-out', 
+          transform: `rotate(${rotation}deg)`
+        }}
+      >
       <Rangoli count={8} x={x} />
+      </div>
       <button onClick={() => setHovered(!hovered)}>Click Me</button>
     </div>
   );
