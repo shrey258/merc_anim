@@ -5,6 +5,13 @@ import { useState } from 'react';
 // Base half-width = 90 × tan(22.5°) ≈ 37.28
 const HollowObjectShape = () => (
   <g fill="none" stroke="black" strokeWidth="2.5" strokeLinejoin="round">
+    <defs>
+      <linearGradient id="petalFill" gradientUnits="userSpaceOnUse"
+        x1="0" y1="5" x2="0" y2="125">
+        <stop offset="0%"   stopColor="#efd5ff" />
+        <stop offset="100%" stopColor="#515ada" />
+      </linearGradient>
+    </defs>
     <polygon points="50,5 87.28,95 12.72,95" />
     <polygon points="12.72,95 87.28,95 70.71,125 29.29,125" />
     <g strokeWidth="1">
@@ -46,7 +53,7 @@ function App() {
     <div className="app">
       <div
         className="rangoli-container"
-        style={{ transition: 'transform 2.8s ease-in-out', 
+        style={{ transition: 'transform 2.8s ease-in-out 0.2s', 
           transform: `rotate(${rotation}deg)`
         }}
       >
