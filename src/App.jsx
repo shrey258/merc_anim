@@ -12,35 +12,50 @@ const HollowObjectShape = () => (
         <stop offset="100%" stopColor="#515ada" />
       </linearGradient>
     </defs>
-    <polygon points="50,5 87.28,95 12.72,95" />
-    <polygon points="12.72,95 87.28,95 70.71,125 29.29,125" />
+    <polygon points="50,5 87.28,95 70.71,125 29.29,125 12.72,95" />
     <g strokeWidth="1">
-      <line x1="50" y1="5" x2="27.632" y2="95" />
-      <line x1="50" y1="5" x2="42.544" y2="95" />
-      <line x1="50" y1="5" x2="57.456" y2="95" />
-      <line x1="50" y1="5" x2="72.368" y2="95" />
-
-      <line x1="27.632" y1="95" x2="37.574" y2="125" />
-      <line x1="42.544" y1="95" x2="45.858" y2="125" />
-      <line x1="57.456" y1="95" x2="54.142" y2="125" />
-      <line x1="72.368" y1="95" x2="62.426" y2="125" />
+      <polyline points="50,5 37.573,95 43.097,125" />
+      <polyline points="50,5 62.427,95 56.903,125" />
     </g>
   </g>
 );
 
+// Lives at world origin (the Rangoli's center). Each petal renders its own
+// copy, but inverse-transformed so the slices line up when converged.
+const Pattern = () => (
+  <g pointerEvents="none" stroke="#111" fill="none" strokeWidth="11">
+    <line x1="0" y1="0" x2="0" y2="-85" />
+    <line x1="0" y1="0" x2="73.61" y2="42.5" />
+    <line x1="0" y1="0" x2="-73.61" y2="42.5" />
+  </g>
+);
+
 const Rangoli = ({ count = 8, x = -50 }) => (
-  <svg 
+  <svg
   width="500" height="500" viewBox="-200 -200 400 400"
   >
-    {Array.from({ length: count }).map((_, i) => (
-      <g
-        key={i}
-        style={{ transition: 'transform 2.8s ease-in-out' }}
-        transform={`rotate(${(i * 360) / count}) translate(${x} -5)`}
-      >
-        <HollowObjectShape />
-      </g>
-    ))}
+    <defs>
+      <clipPath id="petalClip">
+        <polygon points="50,5 87.28,95 12.72,95" />
+      </clipPath>
+    </defs>
+    {Array.from({ length: count }).map((_, i) => {
+      const angle = (i * 360) / count;
+      return (
+        <g
+          key={i}
+          style={{ transition: 'transform 2.8s ease-in-out' }}
+          transform={`rotate(${angle}) translate(${x} -5)`}
+        >
+          {/* <g clipPath="url(#petalClip)">
+            <g transform={`translate(50 5) rotate(${-angle})`}>
+              <Pattern />
+            </g>
+          </g> */}
+          <HollowObjectShape />
+        </g>
+      );
+    })}
   </svg>
 );
 
