@@ -13,10 +13,6 @@ const HollowObjectShape = () => (
       </linearGradient>
     </defs>
     <polygon points="50,5 87.28,95 70.71,125 29.29,125 12.72,95" />
-    <g strokeWidth="1">
-      <polyline points="50,5 37.573,95 43.097,125" />
-      <polyline points="50,5 62.427,95 56.903,125" />
-    </g>
   </g>
 );
 
