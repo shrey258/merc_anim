@@ -4,15 +4,12 @@ import { useState } from 'react';
 // Apex angle = 45° (= 360°/8) so 8 of these tile a full circle perfectly.
 // Base half-width = 90 × tan(22.5°) ≈ 37.28
 const HollowObjectShape = () => (
-  <g fill="none" stroke="black" strokeWidth="2.5" strokeLinejoin="round">
-    <defs>
-      <linearGradient id="petalFill" gradientUnits="userSpaceOnUse"
-        x1="0" y1="5" x2="0" y2="125">
-        <stop offset="0%"   stopColor="#efd5ff" />
-        <stop offset="100%" stopColor="#515ada" />
-      </linearGradient>
-    </defs>
-    <polygon points="50,5 87.28,95 70.71,125 29.29,125 12.72,95" />
+  <g stroke="none" strokeWidth="2.5" strokeLinejoin="round">
+    <polygon
+      points="50,5 87.28,95 70.71,125 29.29,125 12.72,95"
+      fill="url(#petalFill)"
+      filter="url(#innerGlow)"
+    />
   </g>
 );
 
@@ -28,12 +25,25 @@ const Pattern = () => (
 
 const Rangoli = ({ count = 8, x = -50 }) => (
   <svg
-  width="500" height="500" viewBox="-200 -200 400 400"
+    width="500" height="500" viewBox="-200 -200 400 400"
   >
     <defs>
       <clipPath id="petalClip">
         <polygon points="50,5 87.28,95 12.72,95" />
       </clipPath>
+      <linearGradient id="petalFill" gradientUnits="userSpaceOnUse"
+        x1="0" y1="5" x2="0" y2="125">
+        <stop offset="0%" stopColor="#FFFFFF" />
+        <stop offset="55%" stopColor="#FFB877" />
+        <stop offset="100%" stopColor="#FF7A2E" />
+      </linearGradient>
+      <filter id="innerGlow">
+        <feFlood floodColor="white" floodOpacity="1" />
+        <feComposite in2="SourceAlpha" operator="out" />
+        <feGaussianBlur stdDeviation="3" />
+        <feComposite in2="SourceAlpha" operator="in" />
+        <feComposite in2="SourceGraphic" operator="over" />
+      </filter>
     </defs>
     {Array.from({ length: count }).map((_, i) => {
       const angle = (i * 360) / count;
@@ -64,11 +74,12 @@ function App() {
     <div className="app">
       <div
         className="rangoli-container"
-        style={{ transition: 'transform 2.8s ease-in-out 0.2s', 
+        style={{
+          transition: 'transform 2.8s ease-in-out 0.2s',
           transform: `rotate(${rotation}deg)`
         }}
       >
-      <Rangoli count={8} x={x} />
+        <Rangoli count={8} x={x} />
       </div>
       <button onClick={() => setHovered(!hovered)}>Click Me</button>
     </div>
