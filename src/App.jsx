@@ -5,8 +5,13 @@ import { useState } from 'react';
 // Base half-width = 90 × tan(22.5°) ≈ 37.28
 const HollowObjectShape = () => (
   <g stroke="none" strokeWidth="2.5" strokeLinejoin="round">
-    <polygon
-      points="50,5 87.28,95 70.71,125 29.29,125 12.72,95"
+    <path
+      d="M 53.06 12.39
+         L 84.22 87.61 Q 87.28 95 83.41 102
+         L 74.58 118   Q 70.71 125 62.71 125
+         L 37.29 125   Q 29.29 125 25.42 118
+         L 16.59 102   Q 12.72 95 15.78 87.61
+         L 46.94 12.39 Q 50 5 53.06 12.39 Z"
       fill="url(#petalFill)"
       filter="url(#innerGlow)"
     />
