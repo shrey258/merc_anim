@@ -20,13 +20,13 @@ const HollowObjectShape = () => (
 
 // Lives at world origin (the Rangoli's center). Each petal renders its own
 // copy, but inverse-transformed so the slices line up when converged.
-const Pattern = () => (
-  <g pointerEvents="none" stroke="#111" fill="none" strokeWidth="11">
-    <line x1="0" y1="0" x2="0" y2="-85" />
-    <line x1="0" y1="0" x2="73.61" y2="42.5" />
-    <line x1="0" y1="0" x2="-73.61" y2="42.5" />
-  </g>
-);
+// const Pattern = () => (
+//   <g pointerEvents="none" stroke="#111" fill="none" strokeWidth="11">
+//     <line x1="0" y1="0" x2="0" y2="-85" />
+//     <line x1="0" y1="0" x2="73.61" y2="42.5" />
+//     <line x1="0" y1="0" x2="-73.61" y2="42.5" />
+//   </g>
+// );
 
 const Rangoli = ({ count = 8, x = -50 }) => (
   <svg
@@ -51,7 +51,7 @@ const Rangoli = ({ count = 8, x = -50 }) => (
       </filter>
     </defs>
     {Array.from({ length: count }).map((_, i) => {
-      const angle = (i * 360) / count;
+      const angle = ((i * 360) / count) +22.5; // 30° offset for better aesthetics
       return (
         <g
           key={i}
